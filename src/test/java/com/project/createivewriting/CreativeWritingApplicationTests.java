@@ -1,0 +1,13 @@
+package com.project.createivewriting;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class CreativeWritingApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
