@@ -34,30 +34,31 @@ public class DairyEntryController {
         List<DairyEntryVo> dairyEntryVos = service.getAllEntries()
                 .stream().sorted(Comparator.comparing(DairyEntryVo::getId)).toList();
         model.addAttribute("dairyEntriesList",mapper.map(dairyEntryVos));
-        return "dairy-entries-list";
+        return "entries-list";
     }
 
     @PostMapping(path = "/dairy_entry",consumes = "application/json")
-    public ResponseEntity<Void> createEntry(@RequestBody DairyEntryDto dairyEntryDto){
+    public String createEntry(@RequestBody DairyEntryDto dairyEntryDto){
         service.saveEntry(mapper.convert(dairyEntryDto));
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return "";
     }
 
     @PutMapping(path = "/dairy_entry",consumes = "application/json")
-    public ResponseEntity<Void> modifyDairyEntry(@RequestBody DairyEntryDto dairyEntryDto){
+    public String modifyDairyEntry(@RequestBody DairyEntryDto dairyEntryDto){
         service.modifyEntry(mapper.convert(dairyEntryDto));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return "";
     }
 
 
     @DeleteMapping(path = "/dairy_entry/{id}")
-    public ResponseEntity<Void> deleteDairyEntry(@PathVariable(name = "id") Integer id){
+    public String deleteDairyEntry(@PathVariable(name = "id") Integer id){
         service.deleteEntry(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return "";
     }
 
     @GetMapping(path = "/dairy_entry/{id}",produces = "application/json")
-    public ResponseEntity<DairyEntryDto> findById(@PathVariable(name = "id") Integer id){
-        return new ResponseEntity<DairyEntryDto>(mapper.map(service.findById(id)), HttpStatus.OK);
+    public String findById(@PathVariable(name = "id") Integer id){
+        DairyEntryDto dairyEntryDto = mapper.map(service.findById(id));
+        return "";
     }
 }
