@@ -3,6 +3,7 @@
 
 <head>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
 
   <meta charset="UTF-8">
   <title>Creative writing</title>
@@ -23,8 +24,8 @@
         }
 
         .button-container {
-      text-align: right;
-    }
+          text-align: right;
+        }
 
     .button {
       margin-bottom: 10px; /* Optional: Add spacing between the button and the table */
@@ -41,24 +42,52 @@
 <!-- table element-->
 <div class="container">
   <div class="add-button button-container">
+    <a th:href="@{/dairy/dairy_new_entry}">
     <button type="button" class="btn btn-secondary">Add entry</button>
+    </a>
   </div>
+
+  <div>
   <table class="table table-striped">
     <thead class="table-primary">
     <tr>
-      <th scope="col">Index</th>
-      <th scope="col">Date</th>
-      <th scope="col">Entry</th>
+      <th scope="col" class="col-1">Index</th>
+      <th scope="col" class="col-2">Date</th>
+      <th scope="col" class="col-8">Entry</th>
+      <th scope="col" class="col-1"></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="entry : ${dairyEntriesList}">
       <th th:text="${dairyEntriesList.indexOf(entry)+1}"></th>
       <td> <a th:text="${entry.entryDate}" th:href="@{/}"> </a></td>
-      <td th:text="${#strings.substring(entry.content, 0,50)}"></td>
+      <td th:text="${entry.content.length >= 50 ? #strings.substring(entry.content, 0,50) : entry.content }"></td>
+      <td>
+        <a th:href="@{'/dairy/dairy_entry/' + ${entry.id} +'?pageNo='+${currentPage}}" >
+          <i class="bi bi-trash"></i>
+        </a>
+      </td>
     </tr>
+
     </tbody>
   </table>
+  </div>
+
+
+
+  <footer class="fixed-bottom text-center">
+    <div th:if="${totalPages > 1}">
+      <div class="row">
+        <div>
+        <span th:each="i:${#numbers.sequence(1,totalPages)}">
+          <a th:if="${currentPage != i}" th:href="@{'/dairy/dairy_entries/' + ${i}}">[[${i}]] </a>
+          <span th:unless="${currentPage != i}">[[${i}]] </span> &nbsp;&nbsp;
+        </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </div>
 </body>
 </html>

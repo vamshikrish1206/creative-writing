@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Creative Writing</title>
+  <style>
+    .brand-name{
+      margin-left:20px;
+    }
+
+  </style>
 </head>
 <body>
 <div th:fragment="navigation-panel">
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand mb-0 h1">
-      <img src="./pen.png" alt="logo here">
-      Creative Writing
-    </a>
-
+    <div class="brand-name">
+      <a class="navbar-brand mb-0 h1">
+  <!--      <img src="/images/pen.png" alt="logo here">-->
+        &nbsp;&nbsp;Creative Writing
+      </a>
+    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" th:href="@{/}">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/dairy/dairy_entries}">Dairy</a>
+          <a class="nav-link" th:href="@{/dairy/dairy_entries/1}">Dairy</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Musings</a>

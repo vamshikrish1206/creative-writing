@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .input-group-append {
+          cursor: pointer;
+        }
+        .center {
+         text-align: center
+        }
+        .top-navigation {
+            margin-bottom: 20px; /* You can adjust the value as needed */
+        }
+        .add-button {
+            margin-top: 10px; /* You can adjust the value as needed */
+            background-color: $cyan-300;
+        }
+        .button-container {
+          text-align: right;
+          margin-right: 25%;
+        }
+        .text-box {
+            margin-top: 10px; /* You can adjust the value as needed */
+        }
+
+    </style>
     <meta charset="UTF-8">
     <title>Creative writing</title>
 </head>
 <body>
+<div th:insert="fragments :: navigation-panel" class="top-navigation"></div>
+<div class="container">
+    <div>
+        <h2 class="center">
+            <i>let's pen some thoughts down!!</i>
+        </h2>
+    </div>
+    <form th:action="@{/dairy/dairy_entry}" th:object="${dairyEntry}" method="post">
+        <div class="form-group">
+            <label for="datepicker" class="form-label">Select a date:</label>
+            <input
+                    type="date"
+                    style="width:231px"
+                    th:field="*{entryDate}"
+                    class="form-control"
+                    id="datepicker"
+            >
+        </div>
 
+        <div class="form-group form-outline w-75 text-box">
+            <textarea
+                    class="form-control"
+                    id="inputBox"
+                    placeholder="What's new today?"
+                    rows="13"
+                    th:field="*{content}"
+            ></textarea>
+        </div>
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-secondary add-button">Add entry</button>
+        </div>
+    </form>
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
