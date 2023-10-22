@@ -9,6 +9,7 @@ import com.project.createivewriting.model.vo.DairyEntryVo;
 import com.project.createivewriting.service.DairyEntryService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.dialect.PostgreSQLJsonPGObjectJsonbType;
+import org.springframework.cglib.core.Local;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

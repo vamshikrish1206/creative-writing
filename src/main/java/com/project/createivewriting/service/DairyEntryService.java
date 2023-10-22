@@ -13,7 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -51,5 +53,10 @@ public class DairyEntryService {
         }
         return mapper.convert(repository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("DAIRY_ENTRY_NOT_FOUND")));
+    }
+
+    public Boolean existsByDate(LocalDate date){
+        DairyEntry entry = repository.findByDate(date);
+        return !Objects.isNull(entry);
     }
 }
