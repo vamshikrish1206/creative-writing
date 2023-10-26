@@ -28,7 +28,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/dairy")
+@RequestMapping("/creative-writing/dairy")
 public class DairyEntryController {
 
     public static final int PAGE_SIZE = 10;
@@ -82,5 +82,10 @@ public class DairyEntryController {
         DairyEntryDto dairyEntry = new DairyEntryDto();
         model.addAttribute("dairyEntry",dairyEntry);
         return "create-entry";
+    }
+
+    @GetMapping(path = "/display_entry")
+    public String viewEntry(Model model){
+        return "display-entry";
     }
 }
